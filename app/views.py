@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template,request,redirect,url_for
 from app import app
 from .request import get_movies,search_movie
 
@@ -13,10 +13,18 @@ def index():
     popular_movies = get_movies('popular')
     upcoming_movies = get_movies('upcoming')
     now_showing_movies = get_movies('now_playing')
-    print(popular_movies)
+    # print(popular_movies)
+
     title = 'Home - Welcome to the Movie Review Website Online'
-  
-    return render_template('index.html', title = title,popular = popular_movies, upcoming = upcoming_movies, now_showing = now_showing_movies)
+
+    search_movie = request.args.get('movie_query')
+
+    if search_movie:
+
+        return redirect(url_for('search',movie_name= search_movie))
+    else:
+
+        return render_template('index.html', title = title, popular = popular_movies, upcoming = upcoming_movies, now_showing = now_showing_movies)
 
 @app.route('/movie/<int:id>')
 def movie(movie_id):
@@ -28,10 +36,15 @@ def movie(movie_id):
     movie = get_movie(id)
     title= f'{movie.title}'
     return render_template('movie.html', title=title, movie = movie_id)
+
 @app.route('/search/<movie_name>')
 def search(movie_name):
     '''
     View function to display the search results
     '''
-    movie_name_list =movie_name.split(" ")
+    movie_name_list = movie_name.split(" ")
     movie_name_format = "+".join(movie_name_list)
+    searched_movies = search_movie(movie_name_format)
+    title = f'search results for {movie_name}'
+    
+    return render_template('search.html', movies = searched_movies)
