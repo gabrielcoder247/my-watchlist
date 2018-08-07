@@ -1,9 +1,14 @@
+import os
+
 class Config:
     '''
     General configuration parent class
     '''
     MOVIE_API_BASE_URL ='https://api.themoviedb.org/3/movie/{}?api_key={}'
-class prodCofig(Config):
+    MOVIE_API_KEY = 'bbb6132e0d53df8ede26aad722e08cad'
+    SECRET_KEY = '12345'
+
+class prodConfig(Config):
     '''
     Production configuration child class
     Args:
@@ -17,3 +22,9 @@ class DevConfig(Config):
     config: The parent configuration class with General configuration setting
     '''
     DEBUG = True
+
+
+config_options = {
+'development':DevConfig,
+'production':prodConfig
+}    
