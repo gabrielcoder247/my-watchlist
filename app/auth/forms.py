@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtfforms import StringField,PasswordField,SubmitField,BooleanField
-from wtfforms.validators import Required,Email,EqualTo
+from wtforms import StringField,PasswordField,SubmitField,BooleanField
+from wtforms.validators import Required,Email,EqualTo
 from ..models import User
 from wtforms import ValidationError
 
@@ -9,7 +9,7 @@ class RegistrationForm(FlaskForm):
     username = StringField('Enter your username',validators =[Required(),])
     password = PasswordField('Password',validators = [Required(),
     EqualTo('password_confirm',message = 'passwords must match')])
-    password_confirm = PasswordFeld('confirm password',validators = [Required()])
+    password_confirm = PasswordField('confirm password',validators = [Required()])
     Submit = SubmitField('sign Up')
 
     def validate_email(self,data_field):
@@ -22,7 +22,6 @@ class RegistrationForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     email = StringField('Your Email Address', validators=[Required(),Email()])
-    password = PasswordField('password',validators=[Rquired])
+    password = PasswordField('password',validators=[Required])
     remember = BooleanField('Remember me')
     submit = SubmitField('Sign In')
-                       
