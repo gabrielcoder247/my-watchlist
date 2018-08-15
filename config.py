@@ -7,8 +7,9 @@ class Config:
     General configuration parent class
     '''
     MOVIE_API_BASE_URL ='https://api.themoviedb.org/3/movie/{}?api_key={}'
+    SQLALCHEMY_DATABASE_URI = False
     MOVIE_API_KEY = 'bbb6132e0d53df8ede26aad722e08cad'
-    SECRET_KEY = '12345'
+    SECRET_KEY ='12345'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
 
 
@@ -19,6 +20,11 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+
+
+        # simple mde  configurations
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True
 
 
 
