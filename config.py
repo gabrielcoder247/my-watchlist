@@ -7,7 +7,7 @@ class Config:
     General configuration parent class
     '''
     MOVIE_API_BASE_URL ='https://api.themoviedb.org/3/movie/{}?api_key={}'
-    SQLALCHEMY_DATABASE_URI = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     MOVIE_API_KEY = 'bbb6132e0d53df8ede26aad722e08cad'
     SECRET_KEY ='12345'
     UPLOADED_PHOTOS_DEST ='app/static/photos'
@@ -18,15 +18,21 @@ class Config:
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
-    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    MAIL_USERNAME ='gabrielcoder247@gmail.com' 
+    MAIL_PASSWORD = 'dushanbe2015'
+    SUBJECT_PREFIX = 'Watchlist'
+    SENDER_EMAIL = 'gabrielcoder247@gmail.com'
 
 
-        # simple mde  configurations
+     # simple mde  configurations
     SIMPLEMDE_JS_IIFE = True
     SIMPLEMDE_USE_CDN = True
 
 
+
+    @staticmethod
+    def init_app(app):
+        pass
 
 class TestConfig:
 

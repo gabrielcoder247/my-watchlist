@@ -2,7 +2,7 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..requests import get_movies,get_movie,search_movie
 from .forms import ReviewForm,UpdateProfile
-from ..models import Review
+from ..models import Review,User,PhotoProfile
 from flask_login import login_required,current_user
 from ..import db,photos
 import  markdown2
@@ -42,6 +42,7 @@ def movie(id):
     movie = get_movie(id)
     title= f'{movie.title}'
     reviews = Review.get_reviews(movie.id)
+
     return render_template('movie.html', title=title, movie = movie, reviews= reviews)
 
 @main.route('/search/<movie_name>')
@@ -75,7 +76,7 @@ def new_review(id):
 
 @main.route('/user/<uname>')
 def profile(uname):
-    user = User.query,filter_by(username = uname).first()
+    user = User.query.filter_by(username = uname).first()
 
     if user is None:
         abort(404)
@@ -103,7 +104,7 @@ def Update_profile(uname):
 def Update_pic(uname):
     user = User.query.filter_by(username =uname).first()
     if 'photo' in request.files:
-        filename = photos.save(request.files['photos'])
+        filename = photos.save(request.files['photo'])
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
